@@ -31,7 +31,7 @@ int main()
 
         switch (choice)
         {
-        case '1': // Adicionar um corno
+        case '1': // Adicionar uma pessoa
         {
             // Soma 1 na região que tem o nro de pessoas na lista
             (*(int *)pBuffer)++;
