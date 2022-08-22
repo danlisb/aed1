@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 typedef struct
@@ -18,63 +17,27 @@ void clearStdinBuffer()
     }
 }
 
-void validaRealloc(void *ponteiro, void *newPonteiro)
-{
-    if (newPonteiro == NULL)
-    {
-        printf("\nErro de alocação de memória!!\n");
-        getchar();
-        free(ponteiro);
-        exit(EXIT_FAILURE);
-    }
-}
-
 int main(int argc, char const *argv[])
 {
     Pessoa pessoas[10];
 
-    /* Aqui se inicia a declaração das variáveis que serão usadas ao longo do código */
-
-    // Primeira posição de pBuffer será de um ponteiro temporario para validação de reallocs
-    void *pBuffer = malloc(sizeof(void *));
+    // Alocação das variáveis no buffer
+    void *pBuffer = malloc(sizeof(char) + 2 * sizeof(int) + 10 * sizeof(char));
     if (pBuffer == NULL)
     {
         printf("\nErro de alocação de memória!!\n");
         getchar();
         exit(EXIT_FAILURE);
     }
-    void **tempPtr = (void *)pBuffer;
 
-    // Segunda posição do pBuffer guardará o tamanho dele (para aritmética de ponteiros)
-    *tempPtr = realloc(pBuffer, sizeof(int) + sizeof(void *));
-    validaRealloc(pBuffer, *tempPtr);
-    int *sizePBuffer = (int *)(pBuffer + sizeof(void *));
-    *sizePBuffer = sizeof(int) + sizeof(void *);
-
-    // Terceira posição é a da variavel choice
-    *tempPtr = realloc(pBuffer, *sizePBuffer + sizeof(char));
-    char *choice = (char *)((void *)pBuffer + *sizePBuffer);
-    *sizePBuffer += sizeof(char);
-
-    // Quarta posição gurdará o número de nomes salvos no vetor pessoas
-    *tempPtr = realloc(pBuffer, *sizePBuffer + sizeof(int));
-    validaRealloc(pBuffer, *tempPtr);
-    int *numPessoas = (int *)((void *)pBuffer + *sizePBuffer);
+    // Criação e cálculo dos ponteiros
+    char *choice = (char *)pBuffer;
+    int *numPessoas = (int *)((char *)choice + 1);
     *numPessoas = 0;
-    *sizePBuffer += sizeof(int);
+    int *i = (int *)numPessoas + 1;
+    char *nomeBusca = (char *)((int *)i + 1);
 
-    // Quinta posição é a variável de iteração
-    *tempPtr = realloc(pBuffer, *sizePBuffer + sizeof(int));
-    validaRealloc(pBuffer, *tempPtr);
-    int *i = (int *)((void *)pBuffer + *sizePBuffer);
-    *sizePBuffer += sizeof(int);
-
-    // Sexta posição são os caracteres de busca
-    *tempPtr = realloc(pBuffer, *sizePBuffer + (10 * sizeof(char)));
-    validaRealloc(pBuffer, *tempPtr);
-    char *nomeBusca = (char *)((void *)pBuffer + *sizePBuffer);
-    *sizePBuffer += 10 * sizeof(char);
-
+    // Loop principal
     while (1)
     {
         printf("Olá! Digite a sua opção: \n");
@@ -139,7 +102,7 @@ int main(int argc, char const *argv[])
 
             if (*choice < (*numPessoas - 1))
             {
-                while (*i < *numPessoas)
+                while (*i < *numPessoas - 1)
                 {
                     strcpy(pessoas[*i].nome, pessoas[*i + 1].nome);
 
@@ -190,7 +153,7 @@ int main(int argc, char const *argv[])
             break;
         }
 
-        case '5':
+        case '5': // Sair
         {
             free(pBuffer);
             exit(EXIT_SUCCESS);
