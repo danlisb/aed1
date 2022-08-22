@@ -81,7 +81,6 @@ int main(int argc, char const *argv[])
         printf("\n1 - Adicionar\n2 - Apagar\n3 - Buscar\n4 - Listar\n5 - Sair\n");
 
         *choice = getchar();
-
         clearStdinBuffer();
 
         switch (*choice)
@@ -115,13 +114,20 @@ int main(int argc, char const *argv[])
 
         case '2': // Apagar
         {
+            if (*numPessoas == 0)
+            {
+                printf("\nNão há pessoas na agenda!\n");
+                getchar();
+                break;
+            }
+
             printf("\nDigite o número da pessoa para apagar: ");
             scanf("%c", choice);
             clearStdinBuffer();
 
             (*choice) -= '0';
 
-            if (*choice > 10 || *choice < 1)
+            if (*choice > *numPessoas || *choice < 1)
             {
                 printf("\nValor inválido!\n");
                 getchar();
@@ -184,7 +190,7 @@ int main(int argc, char const *argv[])
             break;
         }
 
-        case '5': // Sair
+        case '5':
         {
             free(pBuffer);
             exit(EXIT_SUCCESS);
