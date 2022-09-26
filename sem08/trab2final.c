@@ -16,7 +16,8 @@
 // usar POP e PUSH de pilha e resolva o problema com elas. No vídeo mostrar 4 casos de sim e 4 casos de não.
 // pilha -> last in first out (LIFO)
 
-// criação da struct do tipo Pilha que será usada no programa
+// criação da struct Pilha que contém um ponteiro char data que são as informações
+// e int top para mostrar o topo da pilha e size usado para o seu tamanho
 typedef struct _Pilha
 {
     char *data;
