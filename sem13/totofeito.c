@@ -147,7 +147,6 @@ int main()
 
             eAVL = 1;
             arvore = inserir(arvore, num, &eAVL);
-            getchar();
             break;
 
         case 2:
