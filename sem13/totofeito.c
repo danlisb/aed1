@@ -155,7 +155,7 @@ int main()
                 printf("Árvore: \n");
                 imprimeArv(arvore, 0);
                 if(eAVL)
-                    printf("Essa arvore é AVL\n");
+                    printf("Essa árvore é AVL\n");
                 else
                     printf("Essa árvore não é AVL\n");
             }
