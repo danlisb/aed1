@@ -8,7 +8,7 @@ int main()
     int numsSize = 9, tmp; // editar aqui o tamanho do vetor 
 
     int *vetAux = (int *)malloc(sizeof(int) * (numsSize + 1)); // criacao do vetor auxiliar, aloca-se o tamanho do vetor + 1                                                            
-                                                               //(considerando que falta um elemento no vetor nums[])
+                                                               // (considerando que falta um elemento no vetor nums[])
     memset(vetAux, 0, sizeof(int) * (numsSize + 1)); // coloca 0 no vetor auxiliar usando o memset
 
     for (int i = 0; i < numsSize + 1; i++) 
@@ -27,11 +27,11 @@ int main()
         tmp = nums[j]; // usamos uma variavel temporaria para armazenar os valores do vetor nums[]
         vetAux[tmp] = 1; // se achar o numero correspondente no vetor temporario eh colocado 1 no vetor
     }
-
     printf("\n");
+
     for (int i = 0; i < numsSize + 1; i++)
     {
-        printf("[%d]", vetAux[i]); // printa os elementos com 1 que pertencem ao intervalo e 0 com o que falta
+        printf("[%d]", vetAux[i]); // printa os elementos com 1 que estao no nums[] e 0 no elemento que falta (numSize + 1)
     }
     printf("\n");
 
@@ -40,11 +40,11 @@ int main()
         if (vetAux[i] == 0) // o elemento que nao tiver 1 tem 0, eh o que falta
         {
             printf("[%d]", i); // printamos o elemento com 0 
-            break;
+            break; // usamos um break assim que acharmos o elemento 0
         }
     }
     printf("\n");
 
-    free(vetAux); // limpa o lixo colocado no buffer apos printar o vetor com o resultado
+    free(vetAux); // limpa o lixo colocado no buffer apos printar o vetor auxiliar com o resultado
     return 0;
 }
