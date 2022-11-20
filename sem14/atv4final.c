@@ -25,13 +25,13 @@ int main()
     for (int j = 0; j < numsSize; j++)
     {
         tmp = nums[j]; // usamos uma variavel temporaria para armazenar os valores do vetor nums[]
-        vetAux[tmp] = 1; // se ele acha o numero correspondente no vetor temporario eh colocado 1 no vetor
+        vetAux[tmp] = 1; // se achar o numero correspondente no vetor temporario eh colocado 1 no vetor
     }
 
     printf("\n");
     for (int i = 0; i < numsSize + 1; i++)
     {
-        printf("[%d]", vetAux[i]);
+        printf("[%d]", vetAux[i]); // printa os elementos com 1 que pertencem ao intervalo e 0 com o que falta
     }
     printf("\n");
 
@@ -39,12 +39,12 @@ int main()
     {
         if (vetAux[i] == 0) // o elemento que nao tiver 1 tem 0, eh o que falta
         {
-            printf("[%d]", i); // printamos o elemento com 0
+            printf("[%d]", i); // printamos o elemento com 0 
             break;
         }
     }
     printf("\n");
 
-    free(vetAux); // limpa o lixo colocado
+    free(vetAux); // limpa o lixo colocado no buffer apos printar o vetor com o resultado
     return 0;
 }
